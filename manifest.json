@@ -1,0 +1,35 @@
+{
+  "id": "/life-pulse-pro",
+  "name": "LIFE PULSE PRO",
+  "short_name": "LIFE PULSE",
+  "description": "Офлайн-помічник для самопочуття, відновлення, графіка та особистого контролю.",
+  "lang": "uk",
+  "dir": "ltr",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#06101c",
+  "theme_color": "#07111f",
+  "categories": ["health", "lifestyle", "productivity"],
+  "icons": [
+    { "src": "./lp-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./lp-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./lp-icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "ПУЛЬС-СКАН",
+      "short_name": "Пульс",
+      "url": "./index.html?screen=pulse&source=shortcut",
+      "icons": [{ "src": "./lp-icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Графік і таймер",
+      "short_name": "Графік",
+      "url": "./index.html?screen=schedule&source=shortcut",
+      "icons": [{ "src": "./lp-icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
