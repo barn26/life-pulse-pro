@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="LIFE PULSE PRO — офлайн-помічник для самопочуття, відновлення, графіка та особистого контролю.">
+<link rel="manifest" href="./manifest.json">
+<title>LIFE PULSE PRO</title>
+<style>
+:root{--bg:#06101c;--panel:#0c1a2b;--panel2:#102239;--line:#1c3a55;--text:#e9f5ff;--muted:#91a9bf;--cyan:#36d9ff;--green:#5df2b1;--amber:#ffc86a;--red:#ff7185;--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#102943 0%,var(--bg) 58%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#122a40;color:var(--text);border-radius:12px;padding:10px 13px}button:active{transform:scale(.98)}button.primary{background:linear-gradient(135deg,#087fa6,#1555a4);border-color:#28c7ed;box-shadow:0 0 18px #1ac8ff20}button.good{border-color:#2a916d;background:#10392f}button.warn{border-color:#88612b;background:#3a2a17}button.danger{border-color:#8b3a50;background:#3a1b29}.small{font-size:12px;padding:7px 9px}.muted{color:var(--muted)}.tiny{font-size:11px;color:var(--muted)}.hidden{display:none!important}
+header{position:sticky;top:0;z-index:20;background:#06101ceF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))}
+.headrow{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#063c58,#122d63);border:1px solid #28d8ff80;box-shadow:0 0 20px #22caff25;font-size:23px}.brand h1{font-size:17px;line-height:1.1;margin:0;letter-spacing:.7px}.brand small{color:var(--muted);font-size:11px}.version{font-size:11px;color:var(--cyan);border:1px solid #1c6582;background:#0a2638;border-radius:20px;padding:7px 9px;white-space:nowrap}
+nav{display:flex;gap:7px;overflow-x:auto;padding:11px 0 1px;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav button{flex:0 0 auto;padding:8px 11px;font-size:12px;background:#0b1b2a;color:#b9d2e6}nav button.active{color:#fff;border-color:#28c8f1;background:#12374d;box-shadow:inset 0 0 0 1px #28c8f122}
+main{max-width:1000px;margin:auto;padding:16px 13px 30px}.screen{display:none}.screen.active{display:block}.hero{border:1px solid #1e506a;background:linear-gradient(135deg,#0d2940,#101d37);border-radius:22px;padding:18px;margin-bottom:13px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;right:-65px;top:-80px;border-radius:50%;border:1px solid #28d8ff40;box-shadow:0 0 0 20px #28d8ff08,0 0 0 45px #28d8ff05;pointer-events:none}.eyebrow{color:var(--cyan);font-size:11px;letter-spacing:1.6px;text-transform:uppercase}.hero h2{font-size:25px;margin:5px 0 7px}.hero p{margin:0;color:#b1c9dd;max-width:660px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:linear-gradient(160deg,#0d1e30,#0a1726);border:1px solid var(--line);border-radius:var(--radius);padding:15px;min-width:0;box-shadow:0 8px 24px #00000012}.card h3{font-size:15px;margin:0 0 10px}.card h4{margin:0 0 8px;font-size:13px}.stat{font-size:27px;font-weight:750;letter-spacing:-.6px}.stat.cyan{color:var(--cyan)}.stat.green{color:var(--green)}.stat.amber{color:var(--amber)}.stat.red{color:var(--red)}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.statbox{padding:12px;border-radius:14px;background:#0b1b2b;border:1px solid #17334b}.statbox .label{font-size:11px;color:var(--muted);margin-bottom:4px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.between{display:flex;justify-content:space-between;align-items:center;gap:10px}.stack{display:grid;gap:10px}.field{display:grid;gap:5px;margin:9px 0}.field label{font-size:12px;color:#b9cfe1}.field input,.field select,.field textarea{width:100%;min-width:0;color:var(--text);background:#071523;border:1px solid #25435b;border-radius:11px;padding:11px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #22c8ff15}.field input[type=checkbox]{width:auto}.pill{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:30px;padding:5px 9px;font-size:11px;color:#b9d3e8}.pill.ok{color:var(--green);border-color:#2b7a60}.pill.warn{color:var(--amber);border-color:#88612b}.pill.bad{color:var(--red);border-color:#87394a}.divider{height:1px;background:var(--line);margin:13px 0}.empty{color:var(--muted);text-align:center;padding:18px 10px;border:1px dashed #25435b;border-radius:13px;font-size:13px}.list{display:grid;gap:8px}.item{background:#0a1928;border:1px solid #1b344b;border-radius:13px;padding:11px}.item p{margin:4px 0;color:#a9c1d5;font-size:12px}.itemhead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.progress{height:8px;background:#132b3e;border-radius:20px;overflow:hidden;margin:8px 0}.progress span{display:block;height:100%;background:linear-gradient(90deg,#16a9d7,#5df2b1);border-radius:20px;width:0}.qgroup{padding:12px 0;border-bottom:1px solid #19334a}.qgroup:last-child{border:0}.qgroup>p{font-weight:650;margin:0 0 9px}.choices{display:flex;gap:7px;flex-wrap:wrap}.choice{flex:1;min-width:54px;text-align:center;padding:9px 5px;font-size:12px}.choice.selected{border-color:var(--cyan);background:#10405a;box-shadow:0 0 14px #23cfff18}.recommendation{border-left:3px solid var(--cyan);padding:9px 11px;background:#0b2131;border-radius:0 10px 10px 0;margin:7px 0;font-size:13px}.footer{text-align:center;color:#7893a9;font-size:11px;padding:20px 10px 12px;line-height:1.8}.footer strong{color:#9db8cc;letter-spacing:.5px}.modalback{position:fixed;inset:0;z-index:100;background:#020811d9;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(8px)}.modal{width:min(540px,100%);max-height:88vh;overflow:auto;background:#0b1b2c;border:1px solid #2b526d;border-radius:22px;padding:19px;box-shadow:0 20px 90px #0008}.modal h2{margin:0 0 10px;font-size:20px}.modalfoot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:15px}.lockscreen{position:fixed;inset:0;z-index:200;background:radial-gradient(ellipse at top,#102943,#040a13 70%);display:flex;align-items:center;justify-content:center;padding:20px}.lockcard{width:min(380px,100%);text-align:center;background:#0b1b2b;border:1px solid #25506a;border-radius:24px;padding:24px}.lockcard .logo{margin:0 auto 14px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#12384b;border:1px solid #2cc8ef;border-radius:12px;padding:10px 15px;z-index:300;box-shadow:0 10px 35px #0008;max-width:90%;font-size:13px}.dangertext{color:var(--red)}@media(min-width:760px){main{padding:22px 20px 36px}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:24px}.hero h2{font-size:29px}}@media(max-width:420px){.brand h1{font-size:14px}.logo{width:37px;height:37px}.version{font-size:10px;padding:6px 7px}.grid{gap:9px}.card{padding:12px}.stat{font-size:23px}.hero h2{font-size:22px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="headrow">
+    <div class="brand"><div class="logo">✚</div><div><h1>LIFE PULSE PRO</h1><small>ОФЛАЙН-ПОМІЧНИК • ОСОБИСТИЙ КОНТРОЛЬ</small></div></div>
+    <button class="version" id="versionBtn" aria-label="Історія версій">v1.0.0 ⌄</button>
+  </div>
+  <nav id="nav">
+    <button class="active" data-screen="home">⌂ Головна</button>
+    <button data-screen="pulse">♥ Пульс-скан</button>
+    <button data-screen="schedule">◷ Графік</button>
+    <button data-screen="flight">✈ Облік часу</button>
+    <button data-screen="finance">₴ Фінанси</button>
+    <button data-screen="settings">⚙ Налаштування</button>
+  </nav>
+</header>
+<main>
+<section class="screen active" id="screen-home">
+  <div class="hero"><div class="eyebrow">PERSONAL STATUS SYSTEM</div><h2 id="greeting">Твій щоденний контроль</h2><p>Коротко оціни свій стан, плануй відновлення та тримай важливі часові відліки в одному місці. Дані зберігаються на цьому пристрої.</p></div>
+  <div class="stats">
+    <div class="statbox"><div class="label">ОСТАННІЙ ПУЛЬС-СКАН</div><div class="stat cyan" id="homePulse">—</div><div class="tiny" id="homePulseDate">Пройди короткий тест</div></div>
+    <div class="statbox"><div class="label">НАЙБЛИЖЧИЙ ГРАФІК</div><div class="stat amber" id="homeShift">—</div><div class="tiny" id="homeShiftDetail">Додай початок і кінець</div></div>
+    <div class="statbox"><div class="label">ОБЛІК ЧАСУ СЬОГОДНІ</div><div class="stat green" id="homeFlight">0 хв</div><div class="tiny">Загальний облік часу</div></div>
+    <div class="statbox"><div class="label">ДОСТУПНО СЬОГОДНІ</div><div class="stat cyan" id="homeSpend">Не синхронізовано</div><div class="tiny" id="homeBalance">Баланс: —</div></div>
+  </div>
+  <div class="grid" style="margin-top:12px">
+    <div class="card"><h3>Швидкі дії</h3><div class="stack"><button class="primary" data-go="pulse">♥ Пройти ПУЛЬС-СКАН</button><button data-go="schedule">◷ Додати графік / таймер</button><button data-go="flight">✈ Записати час</button></div></div>
+    <div class="card"><h3>Відновлення сьогодні</h3><p class="muted" style="font-size:13px;margin-top:0">Невеликі дії, які можуть допомогти підтримати працездатність.</p><div id="homeTips"><div class="recommendation">Почни з короткої оцінки сну, енергії та напруження.</div><div class="recommendation">За можливості зроби паузу, випий води та перевір, чи є час на відпочинок.</div></div></div>
+  </div>
+  <p class="tiny" style="margin:12px 3px">Це інструмент самоспостереження, а не медичний висновок. Не вводь секретні службові, тактичні або чужі персональні дані.</p>
+</section>
+<section class="screen" id="screen-pulse">
+  <div class="hero"><div class="eyebrow">DAILY SELF-CHECK</div><h2>ПУЛЬС-СКАН</h2><p>Відповідай за своїм відчуттям за сьогодні. Результат допоможе помітити зміни, але не встановлює діагнозів.</p></div>
+  <div class="grid">
+    <div class="card"><h3>Короткий тест</h3><div id="quiz"></div><button class="primary" id="submitQuiz" style="width:100%;margin-top:14px">Оцінити мій стан</button><p class="tiny">Шкала 0–4: від дуже складно до добре. Відповіді залишаються на пристрої.</p></div>
+    <div class="card"><h3>Результат і поради</h3><div id="pulseResult" class="empty">Пройди тест, щоб побачити підсумок і рекомендації.</div><div class="divider"></div><h4>Історія та динаміка</h4><div id="pulseHistory" class="list"><div class="empty">Поки немає записів.</div></div></div>
+  </div>
+</section>
+<section class="screen" id="screen-schedule">
+  <div class="hero"><div class="eyebrow">PERSONAL SCHEDULE</div><h2>Графік і таймер</h2><p>Задай дату та час початку й завершення. Програма показуватиме, скільки залишилося або скільки часу минуло.</p></div>
+  <div class="grid">
+    <div class="card"><h3>Додати період</h3><form id="shiftForm">
+      <div class="field"><label for="shiftName">Назва</label><input id="shiftName" maxlength="60" placeholder="Наприклад: чергування / зміна" required></div>
+      <div class="field"><label for="shiftStart">Початок</label><input id="shiftStart" type="datetime-local" required></div>
+      <div class="field"><label for="shiftEnd">Завершення</label><input id="shiftEnd" type="datetime-local" required></div>
+      <button class="primary" type="submit" style="width:100%">Зберегти графік</button>
+    </form></div>
+    <div class="card"><h3>Активний відлік</h3><div id="activeShift" class="empty">Немає запланованого періоду.</div><div class="divider"></div><h4>Збережені періоди</h4><div id="shiftList" class="list"><div class="empty">Ще нічого не додано.</div></div></div>
+  </div>
+</section>
+<section class="screen" id="screen-flight">
+  <div class="hero"><div class="eyebrow">TIME LOG</div><h2>Облік часу</h2><p>Записуй тривалість у хвилинах або годинами. Модуль зберігає лише час і необов’язкову нейтральну примітку — без маршрутів, координат чи тактичних відомостей.</p></div>
+  <div class="stats" style="margin-bottom:12px">
+    <div class="statbox"><div class="label">СЬОГОДНІ</div><div class="stat green" id="flightToday">0 хв</div></div>
+    <div class="statbox"><div class="label">ЦЬОГО ТИЖНЯ</div><div class="stat cyan" id="flightWeek">0 хв</div></div>
+    <div class="statbox"><div class="label">ЦЬОГО МІСЯЦЯ</div><div class="stat amber" id="flightMonth">0 хв</div></div>
+    <div class="statbox"><div class="label">ЗАГАЛОМ</div><div class="stat" id="flightAll">0 хв</div></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Додати запис</h3><form id="flightForm">
+      <div class="field"><label for="flightDate">Дата й час</label><input id="flightDate" type="datetime-local" required></div>
+      <div class="field"><label for="flightDuration">Тривалість, хвилин</label><input id="flightDuration" type="number" min="1" max="1440" placeholder="Наприклад: 45" required></div>
+      <div class="field"><label for="flightNote">Примітка (необов'язково)</label><input id="flightNote" maxlength="80" placeholder="Нейтральна примітка"></div>
+      <button class="primary" type="submit" style="width:100%">Зберегти запис</button>
+    </form></div>
+    <div class="card"><h3>Історія записів</h3><div id="flightList" class="list"><div class="empty">Записів поки немає.</div></div></div>
+  </div>
+</section>
+<section class="screen" id="screen-finance">
+  <div class="hero"><div class="eyebrow">LIMITED FINANCE LINK</div><h2>Фінансова інтеграція</h2><p>У LIFE PULSE PRO відображаються лише два значення з Financial Strategy 2026 PRO: поточний баланс і доступно витратити сьогодні.</p></div>
+  <div class="stats">
+    <div class="statbox"><div class="label">ПОТОЧНИЙ БАЛАНС</div><div class="stat cyan" id="financeBalance">—</div><div class="tiny">Останнє імпортоване значення</div></div>
+    <div class="statbox"><div class="label">ДОСТУПНО СЬОГОДНІ</div><div class="stat green" id="financeDaily">—</div><div class="tiny">Денний ліміт / доступна сума</div></div>
+  </div>
+  <div class="grid" style="margin-top:12px">
+    <div class="card"><h3>Оновити дані</h3><p class="muted" style="font-size:13px">Оскільки програми можуть працювати з різних сайтів або локальних файлів, вони не завжди можуть читати спільне сховище автоматично. Тут можна ввести два значення вручну або імпортувати файл JSON, якщо фінансова програма експортує такий знімок.</p>
+      <div class="field"><label for="financeBalanceInput">Поточний баланс (₴)</label><input id="financeBalanceInput" type="number" step="0.01" placeholder="0.00"></div>
+      <div class="field"><label for="financeDailyInput">Доступно сьогодні (₴)</label><input id="financeDailyInput" type="number" step="0.01" placeholder="0.00"></div>
+      <button class="primary" id="saveFinance" style="width:100%">Зберегти два показники</button>
+      <div class="divider"></div><div class="field"><label for="financeFile">Імпорт фінансового знімка JSON</label><input id="financeFile" type="file" accept=".json,application/json"></div><p class="tiny">Імпортуй лише файл, у якому є ці два показники. LIFE PULSE не читає історію транзакцій.</p>
+    </div>
+    <div class="card"><h3>Статус синхронізації</h3><div id="financeStatus" class="recommendation">Дані ще не додано.</div><p class="tiny">Автоматичне читання localStorage іншого сайту заблоковане браузером. Для автоматичної синхронізації потрібен спільний технічний міст або розміщення в одному origin із погодженим форматом даних.</p><button id="clearFinance" class="danger small">Очистити фінансові показники</button></div>
+  </div>
+</section>
+<section class="screen" id="screen-settings">
+  <div class="hero"><div class="eyebrow">CONTROL CENTER</div><h2>Налаштування</h2><p>Керування захистом екрана, резервною копією та локальними даними.</p></div>
+  <div class="grid">
+    <div class="card"><h3>Захист доступу</h3><div id="pinStatus" class="recommendation">PIN не налаштовано.</div><div class="field"><label for="pinInput">Новий PIN (4–8 цифр)</label><input id="pinInput" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="Введи новий PIN"></div><div class="row"><button class="primary" id="setPin">Установити PIN</button><button id="removePin" class="danger">Вимкнути PIN</button></div><div class="field"><label for="autoLock">Автоблокування</label><select id="autoLock"><option value="0">Вимкнено</option><option value="1">Через 1 хв бездіяльності</option><option value="5">Через 5 хв бездіяльності</option><option value="15">Через 15 хв бездіяльності</option></select></div><p class="tiny">PIN — це базове блокування інтерфейсу, а не шифрування даних. Не використовуй PIN від банківських чи інших важливих сервісів. Біометричний вхід залежить від браузера та платформи; звичайний HTML не гарантує нативний вхід за відбитком пальця.</p></div>
+    <div class="card"><h3>Резервна копія</h3><p class="muted" style="font-size:13px">Експортуй дані у файл і збережи його в безпечному місці. Файл резервної копії міститиме твої локальні записи, тому не передавай його стороннім.</p><div class="stack"><button class="primary" id="exportData">Експортувати резервну копію</button><div class="field"><label for="importFile">Відновити з резервної копії JSON</label><input id="importFile" type="file" accept=".json,application/json"></div><button class="danger" id="resetData">Скинути всі дані програми</button></div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><h3>Офлайн-режим і встановлення</h3><p id="offlineStatus" class="recommendation">Перевіряємо доступність офлайн-кешу…</p><p class="tiny">Для встановлення як PWA потрібні HTTPS (наприклад, GitHub Pages), manifest.json і service worker. Перший запуск потребує завантаження файлів; після кешування основний інтерфейс може працювати без мережі.</p><button id="checkUpdates">Перевірити оновлення</button></div>
+</section>
+<div class="footer">© 2026 Всі права захищені<br><strong>РОЗРОБИВ: НАКОНЕЧНИЙ В. М.</strong><br><strong>"БАРС"</strong></div>
+</main>
+<div id="modalRoot"></div><div id="toast" class="toast hidden" role="status"></div>
+<div id="lockscreen" class="lockscreen hidden"><div class="lockcard"><div class="logo">✚</div><div class="eyebrow">ACCESS CONTROL</div><h2 style="margin:8px 0">LIFE PULSE PRO</h2><p class="muted">Введи PIN для продовження</p><form id="unlockForm"><div class="field"><input id="unlockPin" inputmode="numeric" type="password" maxlength="8" placeholder="PIN-код" required></div><button class="primary" style="width:100%">Розблокувати</button></form><p id="unlockError" class="dangertext tiny"></p></div></div>
+<script>
+(() => {
+'use strict';
+const KEY='life_pulse_pro_v1';
+const $=id=>document.getElementById(id);
+const nowLocalInput=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)};
+const isoDay=d=>{const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
+const money=n=>Number(n).toLocaleString('uk-UA',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₴';
+const duration=n=>{n=Math.max(0,Math.floor(n));const d=Math.floor(n/1440),h=Math.floor((n%1440)/60),m=n%60;return [d?d+' д':'',h?h+' год':'',m+' хв'].filter(Boolean).join(' ')};
+const dateFmt=s=>new Date(s).toLocaleString('uk-UA',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const defaults={pulses:[],shifts:[],flights:[],finance:null,security:{pin:null,autoLock:0}};
+let data=load(), quizAnswers=[null,null,null,null,null], toastTimer, lastActivity=Date.now(), locked=false;
+function load(){try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||'{}'),security:{...defaults.security,...(JSON.parse(localStorage.getItem(KEY)||'{}').security||{})}}}catch(e){return structuredClone(defaults)}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
+function toast(s){$('toast').textContent=s;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),2600)}
+function showScreen(name){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id==='screen-'+name));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===name));window.scrollTo({top:0,behavior:'smooth'})}
+$('nav').addEventListener('click',e=>{const b=e.target.closest('[data-screen]');if(b)showScreen(b.dataset.screen)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)showScreen(b.dataset.go)});
+function renderQuiz(){const qs=[['Як оцінюєш свій настрій?',['Дуже важко','Важко','Посередньо','Добре','Дуже добре']],['Скільки в тебе зараз енергії?',['Майже немає','Мало','Середньо','Достатньо','Багато']],['Як пройшов сон / відпочинок?',['Дуже погано','Погано','Посередньо','Добре','Дуже добре']],['Наскільки сильне напруження?',['Дуже сильне','Сильне','Помірне','Невелике','Майже немає']],['Як із концентрацією та відновленням?',['Дуже складно','Складно','Посередньо','Добре','Дуже добре']]];
+$('quiz').innerHTML=qs.map((q,i)=>`<div class="qgroup"><p>${i+1}. ${q[0]}</p><div class="choices">${q[1].map((v,j)=>`<button type="button" class="choice ${quizAnswers[i]===j?'selected':''}" data-q="${i}" data-v="${j}">${j+1}<br><span class="tiny">${v}</span></button>`).join('')}</div></div>`).join('');
+}
+$('quiz').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(!b)return;quizAnswers[+b.dataset.q]=+b.dataset.v;renderQuiz()});
+function assess(a){const positive=(a[0]+a[1]+a[2]+(4-a[3])+a[4]);const score=Math.round(positive/20*100);let level,advice=[];
+if(score<40){level='Потрібно знизити навантаження';advice=['Якщо можливо, зроби паузу та обери одну найнеобхіднішу справу.','Подбай про воду, їжу й можливість відпочити.','Поговори з людиною, якій довіряєш, якщо стан не поліпшується або стає важко справлятися.'];}
+else if(score<65){level='Ресурс обмежений';advice=['Заплануй коротку перерву та відновлення між справами.','Зменш багатозадачність: обери одну дію й заверши її.','Спробуй сьогодні підтримати звичний режим сну та харчування.'];}
+else if(score<82){level='Стан помірно стабільний';advice=['Підтримуй регулярні паузи й не ігноруй втому.','Розподіли навантаження та залиш час на відновлення.'];}
+else{level='Самопочуття за відповідями добре';advice=['Збережи баланс навантаження та відпочинку.','Продовжуй відстежувати сон, енергію й напруження.'];}
+if(a[3]<=1)advice.unshift('Напруження високе: спробуй коротке повільне дихання та, якщо можливо, звернися по підтримку.');
+if(a[2]<=1)advice.unshift('Відпочинок був недостатнім: за можливості пріоритет — безпечна пауза та сон.');
+return {score,level,advice}}
+$('submitQuiz').addEventListener('click',()=>{if(quizAnswers.some(v=>v===null)){toast('Дай відповідь на всі 5 запитань.');return}const r=assess(quizAnswers);data.pulses.unshift({id:Date.now(),date:new Date().toISOString(),answers:[...quizAnswers],score:r.score,level:r.level,advice:r.advice});data.pulses=data.pulses.slice(0,120);save();renderPulseResult(data.pulses[0]);toast('ПУЛЬС-СКАН збережено')});
+function renderPulseResult(p){if(!p){$('pulseResult').className='empty';$('pulseResult').textContent='Пройди тест, щоб побачити підсумок і рекомендації.';return}$('pulseResult').className='';$('pulseResult').innerHTML=`<div class="between"><span class="pill ${p.score<40?'bad':p.score<65?'warn':'ok'}">${esc(p.level)}</span><strong class="stat ${p.score<40?'red':p.score<65?'amber':'green'}">${p.score}/100</strong></div><div class="progress"><span style="width:${p.score}%"></span></div><p class="tiny">${dateFmt(p.date)}</p>${p.advice.map(t=>`<div class="recommendation">${esc(t)}</div>`).join('')}<p class="tiny">Оцінка базується на твоїх відповідях і не є медичним діагнозом.</p>`}
+function renderPulse(){renderPulseResult(data.pulses[0]);$('pulseHistory').innerHTML=data.pulses.length?data.pulses.slice(0,10).map((p,i)=>`<div class="item"><div class="itemhead"><div><strong>${esc(p.level)}</strong><p>${dateFmt(p.date)}</p></div><span class="pill ${p.score<40?'bad':p.score<65?'warn':'ok'}">${p.score}/100</span></div>${i===0?'':`<div class="tiny">Зміна до останнього: ${p.score-data.pulses[0].score>0?'+':''}${p.score-data.pulses[0].score} балів</div>`}</div>`).join(''):'<div class="empty">Поки немає записів.</div>'}
+$('shiftForm').addEventListener('submit',e=>{e.preventDefault();const start=new Date($('shiftStart').value),end=new Date($('shiftEnd').value);if(!Number.isFinite(+start)||!Number.isFinite(+end)||end<=start){toast('Час завершення має бути пізніше за початок.');return}data.shifts.push({id:Date.now(),name:$('shiftName').value.trim(),start:start.toISOString(),end:end.toISOString()});data.shifts.sort((a,b)=>new Date(a.start)-new Date(b.start));save();e.target.reset();$('shiftStart').value=nowLocalInput();toast('Графік збережено')});
+function shiftState(s){const n=Date.now(),a=+new Date(s.start),b=+new Date(s.end);if(n<a)return {label:'Очікується',cls:'warn',remain:Math.ceil((a-n)/60000),detail:'До початку'};if(n<b)return {label:'Триває',cls:'ok',remain:Math.ceil((b-n)/60000),detail:'До завершення'};return {label:'Завершено',cls:'',remain:Math.floor((n-b)/60000),detail:'Минуло після завершення'}}
+function renderShifts(){const active=data.shifts.filter(s=>+new Date(s.end)>Date.now()).sort((a,b)=>+new Date(a.start)-+new Date(b.start))[0];if(!active){$('activeShift').className='empty';$('activeShift').textContent='Немає активного або майбутнього періоду.';$('homeShift').textContent='—';$('homeShiftDetail').textContent='Додай початок і кінець'}else{const st=shiftState(active);$('activeShift').className='';$('activeShift').innerHTML=`<span class="pill ${st.cls}">${st.label}</span><h2 style="font-size:20px;margin:10px 0 3px">${esc(active.name)}</h2><div class="stat cyan" data-countdown="${active.id}">${duration(st.remain)}</div><p class="muted" style="font-size:12px">${st.detail} • ${dateFmt(st.detail==='До початку'?active.start:active.end)}</p><div class="divider"></div><p class="tiny">Початок: ${dateFmt(active.start)}<br>Завершення: ${dateFmt(active.end)}</p>`;$('homeShift').textContent=duration(st.remain);$('homeShiftDetail').textContent=st.detail+' • '+active.name}
+$('shiftList').innerHTML=data.shifts.length?[...data.shifts].sort((a,b)=>+new Date(b.start)-+new Date(a.start)).map(s=>{const st=shiftState(s);return `<div class="item"><div class="itemhead"><div><strong>${esc(s.name)}</strong><p>${dateFmt(s.start)} — ${dateFmt(s.end)}</p></div><span class="pill ${st.cls}">${st.label}</span></div><div class="row" style="margin-top:8px"><span class="tiny">${st.detail}: ${duration(st.remain)}</span><button class="small danger" data-delete-shift="${s.id}">Видалити</button></div></div>`}).join(''):'<div class="empty">Ще нічого не додано.</div>'}
+$('shiftList').addEventListener('click',e=>{const b=e.target.closest('[data-delete-shift]');if(b){data.shifts=data.shifts.filter(s=>s.id!==+b.dataset.deleteShift);save();toast('Період видалено')}});
+function weekStart(d){const x=new Date(d);x.setHours(0,0,0,0);const day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);return x}
+function flightTotals(){const now=new Date(),today=isoDay(now),ws=weekStart(now),month=now.getMonth(),year=now.getFullYear();let t=0,w=0,m=0,all=0;data.flights.forEach(f=>{const d=new Date(f.date),n=+f.minutes;all+=n;if(isoDay(d)===today)t+=n;if(d>=ws)w+=n;if(d.getMonth()===month&&d.getFullYear()===year)m+=n});return {t,w,m,all}}
+function renderFlights(){const x=flightTotals();$('flightToday').textContent=duration(x.t);$('flightWeek').textContent=duration(x.w);$('flightMonth').textContent=duration(x.m);$('flightAll').textContent=duration(x.all);$('homeFlight').textContent=duration(x.t);$('flightList').innerHTML=data.flights.length?[...data.flights].sort((a,b)=>+new Date(b.date)-+new Date(a.date)).slice(0,50).map(f=>`<div class="item"><div class="itemhead"><div><strong>${duration(+f.minutes)}</strong><p>${dateFmt(f.date)}</p>${f.note?`<p>${esc(f.note)}</p>`:''}</div><button class="small danger" data-delete-flight="${f.id}">Видалити</button></div></div>`).join(''):'<div class="empty">Записів поки немає.</div>'}
+$('flightForm').addEventListener('submit',e=>{e.preventDefault();const mins=Number($('flightDuration').value),date=new Date($('flightDate').value);if(!Number.isFinite(mins)||mins<1||mins>1440||!Number.isFinite(+date)){toast('Перевір дату та тривалість.');return}data.flights.push({id:Date.now(),date:date.toISOString(),minutes:Math.round(mins),note:$('flightNote').value.trim()});save();$('flightDate').value=nowLocalInput();$('flightDuration').value='';$('flightNote').value='';toast('Запис збережено')});
+$('flightList').addEventListener('click',e=>{const b=e.target.closest('[data-delete-flight]');if(b){data.flights=data.flights.filter(f=>f.id!==+b.dataset.deleteFlight);save();toast('Запис видалено')}});
+function renderFinance(){const f=data.finance;if(!f){$('financeBalance').textContent='—';$('financeDaily').textContent='—';$('homeSpend').textContent='Не синхронізовано';$('homeBalance').textContent='Баланс: —';$('financeStatus').textContent='Дані ще не додано.';$('financeBalanceInput').value='';$('financeDailyInput').value='';return}$('financeBalance').textContent=money(f.balance);$('financeDaily').textContent=money(f.daily);$('homeSpend').textContent=money(f.daily);$('homeBalance').textContent='Баланс: '+money(f.balance);$('financeStatus').textContent='Оновлено: '+dateFmt(f.updated)+' • збережено лише два показники.';$('financeBalanceInput').value=f.balance;$('financeDailyInput').value=f.daily}
+$('saveFinance').addEventListener('click',()=>{const b=Number($('financeBalanceInput').value),d=Number($('financeDailyInput').value);if($('financeBalanceInput').value===''||$('financeDailyInput').value===''||!Number.isFinite(b)||!Number.isFinite(d)){toast('Введи обидва значення.');return}data.finance={balance:b,daily:d,updated:new Date().toISOString()};save();toast('Фінансові показники збережено')});
+$('clearFinance').addEventListener('click',()=>{data.finance=null;save();toast('Фінансові показники очищено')});
+$('financeFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());const b=Number(j.balance??j.currentBalance),d=Number(j.daily??j.dailyAmount??j.availableToday);if(!Number.isFinite(b)||!Number.isFinite(d))throw Error('missing');data.finance={balance:b,daily:d,updated:new Date().toISOString()};save();toast('Два фінансові показники імпортовано')}catch(err){toast('Не вдалося прочитати JSON. Потрібні поля balance та daily (або currentBalance та dailyAmount).')}e.target.value=''});
+function renderHome(){const p=data.pulses[0];$('homePulse').textContent=p?p.score+'/100':'—';$('homePulseDate').textContent=p?new Date(p.date).toLocaleDateString('uk-UA'):'Пройди короткий тест';$('homeTips').innerHTML=p?p.advice.slice(0,2).map(t=>`<div class="recommendation">${esc(t)}</div>`).join(''):'<div class="recommendation">Почни з короткої оцінки сну, енергії та напруження.</div><div class="recommendation">За можливості зроби паузу, випий води та перевір, чи є час на відпочинок.</div>'}
+function renderSecurity(){const pin=data.security.pin;$('pinStatus').textContent=pin?'PIN увімкнено. Автоблокування можна змінити нижче.':'PIN не налаштовано.';$('autoLock').value=String(data.security.autoLock||0)}
+function renderAll(){renderHome();renderPulse();renderShifts();renderFlights();renderFinance();renderSecurity()}
+$('setPin').addEventListener('click',()=>{const p=$('pinInput').value;if(!/^\d{4,8}$/.test(p)){toast('PIN має містити 4–8 цифр.');return}data.security.pin=p;data.security.autoLock=Number($('autoLock').value);save();$('pinInput').value='';toast('PIN установлено')});
+$('removePin').addEventListener('click',()=>{data.security.pin=null;save();toast('PIN вимкнено')});
+$('autoLock').addEventListener('change',()=>{data.security.autoLock=Number($('autoLock').value);save();toast('Автоблокування оновлено')});
+function lock(){if(!data.security.pin||locked)return;locked=true;$('lockscreen').classList.remove('hidden');$('unlockPin').value='';$('unlockError').textContent='';setTimeout(()=>$('unlockPin').focus(),50)}
+$('unlockForm').addEventListener('submit',e=>{e.preventDefault();if($('unlockPin').value===data.security.pin){locked=false;$('lockscreen').classList.add('hidden');lastActivity=Date.now()}else{$('unlockError').textContent='PIN неправильний. Спробуй ще раз.';$('unlockPin').value=''}});
+['click','keydown','touchstart','scroll'].forEach(ev=>document.addEventListener(ev,()=>{lastActivity=Date.now()} ,{passive:true}));
+setInterval(()=>{if(data.security.pin&&data.security.autoLock>0&&!locked&&Date.now()-lastActivity>=Number(data.security.autoLock)*60000)lock();renderShifts()},15000);
+function download(name,content,type='application/json'){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$('exportData').addEventListener('click',()=>download('life-pulse-pro-backup-'+isoDay(new Date())+'.json',JSON.stringify({...data,exportedAt:new Date().toISOString(),app:'LIFE PULSE PRO'},null,2)));
+$('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());if(!j||!Array.isArray(j.pulses)||!Array.isArray(j.shifts)||!Array.isArray(j.flights))throw Error('format');if(!confirm('Відновити резервну копію? Поточні локальні дані буде замінено.'))return;data={...defaults,...j,security:{...defaults.security,...(j.security||{})}};save();toast('Резервну копію відновлено')}catch(err){toast('Файл не схожий на резервну копію LIFE PULSE PRO.')}e.target.value=''});
+$('resetData').addEventListener('click',()=>{if(!confirm('Точно стерти всі записи, налаштування та фінансові показники з цього пристрою? Спочатку зроби резервну копію, якщо вона потрібна.'))return;data=structuredClone(defaults);save();toast('Локальні дані скинуто')});
+$('versionBtn').addEventListener('click',()=>openModal('Історія версій',`<div class="item"><div class="itemhead"><strong>v1.0.0 — Перший випуск</strong><span class="pill ok">16.10.2026</span></div><p>Базові модулі: ПУЛЬС-СКАН, графік і відлік, облік часу, обмежена фінансова інтеграція, PIN-блокування, резервна копія та офлайн-кеш.</p></div><p class="tiny">Дати — це записи історії версій у програмі, а не автоматично перевірені дати публікації на сайті.</p>`,[{label:'Закрити',primary:true,action:closeModal}]));
+function openModal(title,body,buttons=[]){$('modalRoot').innerHTML=`<div class="modalback" id="modalback"><div class="modal"><h2>${esc(title)}</h2><div>${body}</div><div class="modalfoot" id="modalBtns"></div></div></div>`;buttons.forEach(b=>{const x=document.createElement('button');x.textContent=b.label;if(b.primary)x.className='primary';x.onclick=b.action;$('modalBtns').appendChild(x)});$('modalback').addEventListener('click',e=>{if(e.target.id==='modalback')closeModal()})}
+function closeModal(){$('modalRoot').innerHTML=''}
+$('checkUpdates').addEventListener('click',async()=>{try{if('serviceWorker'in navigator){const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.update()));toast('Перевірку оновлень запущено. Перезавантаж сторінку, якщо доступна нова версія.')}else toast('Цей браузер не підтримує service worker.')}catch(e){toast('Не вдалося перевірити оновлення.')}});
+async function initOffline(){if(!('serviceWorker'in navigator)){$('offlineStatus').textContent='Service worker не підтримується цим браузером.';return}if(location.protocol==='file:'){$('offlineStatus').textContent='Файл відкрито напряму. Для PWA та офлайн-кешу розмісти файли на HTTPS, наприклад GitHub Pages.';return}try{await navigator.serviceWorker.register('./sw.js');$('offlineStatus').textContent='Service worker зареєстровано. Після першого завантаження файли будуть кешуватися для офлайн-використання.'}catch(e){$('offlineStatus').textContent='Не вдалося зареєструвати офлайн-кеш. Перевір, що index.html, manifest.json і sw.js лежать в одній папці на HTTPS.'}}
+$('shiftStart').value=nowLocalInput();$('flightDate').value=nowLocalInput();renderQuiz();renderAll();initOffline();
+})();
+</script>
+</body>
+</html>
